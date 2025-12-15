@@ -14,7 +14,7 @@ export default function Home() {
         "Valid for 1 Year",
         "All Digital Materials Included"
       ],
-      link: process.env.NEXT_PUBLIC_STRIPE_LINK_10 || "#",
+      link: process.env.NEXT_PUBLIC_STRIPE_LINK_5 || "#",
       // Brand Blue
       headerColor: "bg-[#008CB8]",
       btnColor: "bg-[#008CB8] hover:bg-[#007093]",
@@ -31,7 +31,7 @@ export default function Home() {
         "Valid for 1 Year",
         "All Digital Materials Included"
       ],
-      link: process.env.NEXT_PUBLIC_STRIPE_LINK_25 || "#",
+      link: process.env.NEXT_PUBLIC_STRIPE_LINK_10 || "#",
       // Brand Magenta
       headerColor: "bg-[#CA035E]",
       btnColor: "bg-[#CA035E] hover:bg-[#A0024B]",
