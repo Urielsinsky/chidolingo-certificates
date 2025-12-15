@@ -108,8 +108,8 @@ export default function Home() {
                   <MousePointerClick className="w-5 h-5 text-[#008CB8]" />
                 </div>
                 <div className="text-center">
-                  <span className="block text-sm font-black text-[#3D2E28]">Buy</span>
-                  <span className="block text-[10px] font-medium text-[#5D4037] leading-tight mt-1">Select a certificate</span>
+                  <span className="block text-sm font-black text-[#3D2E28]">Secure Payment</span>
+                  <span className="block text-[10px] font-medium text-[#5D4037] leading-tight mt-1">Pay with Stripe first</span>
                 </div>
               </div>
 
@@ -120,7 +120,7 @@ export default function Home() {
                 </div>
                 <div className="text-center">
                   <span className="block text-sm font-black text-[#3D2E28]">Personalize</span>
-                  <span className="block text-[10px] font-medium text-[#5D4037] leading-tight mt-1">Add custom note</span>
+                  <span className="block text-[10px] font-medium text-[#5D4037] leading-tight mt-1">Add details <b>after</b> checking out</span>
                 </div>
               </div>
 
@@ -131,7 +131,7 @@ export default function Home() {
                 </div>
                 <div className="text-center">
                   <span className="block text-sm font-black text-[#3D2E28]">Redeem</span>
-                  <span className="block text-[10px] font-medium text-[#5D4037] leading-tight mt-1">They book anytime</span>
+                  <span className="block text-[10px] font-medium text-[#5D4037] leading-tight mt-1">Sent instantly via email</span>
                 </div>
               </div>
             </div>
