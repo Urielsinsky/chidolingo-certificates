@@ -1,33 +1,57 @@
-# ChidoLingo Gift Certificates - Setup Guide (Simplified)
+# ChidoLingo Configuration Guide (SETUP.md)
 
-## 1. Environment Variables
-Update your `.env.local` file. **Note: Supabase keys are NO LONGER NEEDED.**
+This document details the specific configuration required to make the app function.
+**Use this reference to populate your `.env.local` file.**
 
+## 1. Environment Variables (`.env.local`)
+
+Create a file named `.env.local` in the project root and add the following keys.
+
+### 💳 Stripe Configuration
+Required for processing payments.
 ```bash
-# Stripe
-NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=pk_test_... (REDACTED)
-STRIPE_SECRET_KEY=sk_live_... (REDACTED - See .env.local)
+# Public key (Safe to share, needed for client-side operations if any)
+NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=pk_test_... (Check Stripe Dashboard)
 
-# Email
-RESEND_API_KEY=re_... (REDACTED - See .env.local)
-# Site Config
-NEXT_PUBLIC_SITE_URL=http://localhost:3000
-
-# Stripe Payment Links (Create these in Stripe Dashboard)
-NEXT_PUBLIC_STRIPE_LINK_10=https://buy.stripe.com/...
-NEXT_PUBLIC_STRIPE_LINK_25=https://buy.stripe.com/...
+# Secret key (KEEP SECRET! Used for verifying sessions serverside)
+STRIPE_SECRET_KEY=sk_live_... (Check Stripe Dashboard)
 ```
 
-## 2. Stripe Setup
-1.  **Payment Links**: Ensure you have two links (10 & 25 lessons).
-2.  **Redirect**: Set the confirmation page to `http://localhost:3000/success?session_id={CHECKOUT_SESSION_ID}`.
-3.  **Metadata**: Add `certificate_type` (`10_lessons` OR `25_lessons`) to the Payment Link.
-    *   *No webhook setup is required anymore since we validate on the Success page.*
+### 📧 Email Configuration (Resend)
+Required for sending the digital certificates.
+```bash
+# API Key from Resend.com
+RESEND_API_KEY=re_... (Check Resend Dashboard)
+```
 
-## 3. Assets
-Ensure PDFs are in `public/assets/`:
+### 🔗 Payment Links
+These are the Stripe Payment Links created in the Stripe Dashboard.
+```bash
+# 5 Lessons Package
+NEXT_PUBLIC_STRIPE_LINK_5=https://buy.stripe.com/...
+
+# 10 Lessons Package
+NEXT_PUBLIC_STRIPE_LINK_10=https://buy.stripe.com/...
+```
+
+### 🌍 Site Configuration
+```bash
+NEXT_PUBLIC_SITE_URL=http://localhost:3000
+# In production, change to: https://gift.chidolingo.com
+```
+
+## 2. Stripe Dashboard Setup
+1.  **Create Payment Links**: create two payment links (one for 5 lessons, one for 10).
+2.  **Redirect Behavior**: Configure the payment link to redirect after purchase to:
+    `http://localhost:3000/success?session_id={CHECKOUT_SESSION_ID}`
+    *(Replace `http://localhost:3000` with your production domain when live)*
+3.  **Metadata**: You may need to ensure the product names in Stripe match what the code expects if you are doing strict validation, though currently, the app validates based on the session existence.
+
+## 3. Important Assets
+Ensure the following files exist in your local `public/assets/` folder (these are not always in git if .gitignored, but they should be committed):
+-   `public/assets/5_lessons.pdf` (or `certificate.pdf`)
 -   `public/assets/10_lessons.pdf`
--   `public/assets/25_lessons.pdf`
 
 ## 4. Troubleshooting
-If the site looks unstyled, ensure `tailwind.config.ts` exists (I have restored it).
+-   **Emails not sending?** Check your Resend API Key and ensure the domain is verified in Resend.
+-   **Stripe error?** Verification on `/success` requires the `STRIPE_SECRET_KEY` to be correct.
