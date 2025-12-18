@@ -19,8 +19,7 @@ export async function GET(req: Request) {
             amount_total: session.amount_total,
             metadata: session.metadata
         });
-    } catch (e: any) {
-        console.error("Stripe Error:", e);
-        return new NextResponse(`Error: ${e.message}`, { status: 500 });
+    } catch (e) {
+        return new NextResponse('Not found', { status: 404 });
     }
 }
